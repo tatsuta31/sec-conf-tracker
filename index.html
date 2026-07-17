@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>セキュリティ カンファレンス トラッカー | Blue Team Briefing</title>
+<meta name="description" content="2026年7月以降のセキュリティカンファレンスをBlue Team関連度で格付けした監視リスト。SOC/IR/フォレンジック志向のアナリスト向け。">
+<meta property="og:title" content="セキュリティ カンファレンス トラッカー">
+<meta property="og:description" content="Blue Team関連度で格付けした2026-2027カンファレンス監視リスト">
+<style>html{background:#0a0e17}body{margin:0}@media(prefers-color-scheme:light){html{background:#eef1f7}}:root[data-theme="light"] html,html:has(:root[data-theme="light"]){background:#eef1f7}</style>
+</head>
+<body>
+<style>
+  :root {
+    --ground: #0a0e17;
+    --surface: #111725;
+    --surface-2: #172033;
+    --border: #263049;
+    --border-soft: #1c2438;
+    --text: #e7ecf6;
+    --text-dim: #9aa6c0;
+    --text-faint: #6b768f;
+    --accent: #ffb454;
+    --accent-strong: #ff9e2c;
+    --teal: #5ad1c0;
+    --sev-crit: #ff6b6b;
+    --sev-high: #ffb454;
+    --sev-mid: #6b8afd;
+    --shadow: 0 1px 0 rgba(255,255,255,.03), 0 8px 30px rgba(0,0,0,.35);
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", "Consolas", "Roboto Mono", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground: #eef1f7;
+      --surface: #ffffff;
+      --surface-2: #f5f7fc;
+      --border: #d3dae8;
+      --border-soft: #e4e9f3;
+      --text: #131a29;
+      --text-dim: #56617a;
+      --text-faint: #808aa1;
+      --accent: #c77500;
+      --accent-strong: #a85f00;
+      --teal: #0f9488;
+      --sev-crit: #d64545;
+      --sev-high: #c77500;
+      --sev-mid: #3a5bd0;
+      --shadow: 0 1px 2px rgba(20,30,60,.06), 0 8px 24px rgba(20,30,60,.08);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0a0e17; --surface: #111725; --surface-2: #172033;
+    --border: #263049; --border-soft: #1c2438; --text: #e7ecf6;
+    --text-dim: #9aa6c0; --text-faint: #6b768f; --accent: #ffb454;
+    --accent-strong: #ff9e2c; --teal: #5ad1c0; --sev-crit: #ff6b6b;
+    --sev-high: #ffb454; --sev-mid: #6b8afd;
+    --shadow: 0 1px 0 rgba(255,255,255,.03), 0 8px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --ground: #eef1f7; --surface: #ffffff; --surface-2: #f5f7fc;
+    --border: #d3dae8; --border-soft: #e4e9f3; --text: #131a29;
+    --text-dim: #56617a; --text-faint: #808aa1; --accent: #c77500;
+    --accent-strong: #a85f00; --teal: #0f9488; --sev-crit: #d64545;
+    --sev-high: #c77500; --sev-mid: #3a5bd0;
+    --shadow: 0 1px 2px rgba(20,30,60,.06), 0 8px 24px rgba(20,30,60,.08);
+  }
+
+  * { box-sizing: border-box; }
+  .wrap {
+    font-family: var(--sans);
+    background: var(--ground);
+    color: var(--text);
+    min-height: 100vh;
+    margin: 0;
+    padding: clamp(20px, 5vw, 56px) clamp(16px, 5vw, 40px) 64px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .inner { max-width: 940px; margin: 0 auto; }
+
+  /* Header */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+    margin: 0 0 18px;
+  }
+  .eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  @media (prefers-reduced-motion: reduce) { .eyebrow::before { animation: none; } }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    font-weight: 800;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .lead {
+    color: var(--text-dim);
+    font-size: clamp(15px, 2vw, 17px);
+    max-width: 62ch;
+    margin: 0 0 26px;
+  }
+  .lead b { color: var(--text); font-weight: 600; }
+
+  /* Meta strip */
+  .metastrip {
+    display: flex; flex-wrap: wrap; gap: 10px 26px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+  }
+  .metastrip .stat { display: flex; flex-direction: column; gap: 2px; }
+  .metastrip .num { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .metastrip .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-faint); }
+  .metastrip .divider { width: 1px; background: var(--border); align-self: stretch; }
+  .legend { margin-left: auto; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .legend .li { display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--text-dim); }
+  .dot { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+  .dot.crit { background: var(--sev-crit); }
+  .dot.high { background: var(--sev-high); }
+  .dot.mid  { background: var(--sev-mid); }
+
+  /* Section titles */
+  .sec-title {
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex; align-items: center; gap: 12px;
+    margin: 0 0 20px;
+  }
+  .sec-title::after { content: ""; flex: 1; height: 1px; background: var(--border-soft); }
+
+  /* Priority cards */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 48px; }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 20px 20px 20px 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--rail, var(--accent)); }
+  .card:hover { transform: translateY(-3px); border-color: var(--border); }
+  @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
+  .card .rank { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--text-faint); }
+  .card h3 { margin: 6px 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--accent); }
+  .card .when { font-family: var(--mono); font-size: 13px; color: var(--teal); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+  .card .why { font-size: 13.5px; color: var(--text-dim); line-height: 1.5; }
+
+  /* Table rows */
+  .group { margin-bottom: 34px; }
+  .rows { display: flex; flex-direction: column; border: 1px solid var(--border-soft); border-radius: 12px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+  .row {
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 15px 18px;
+    border-top: 1px solid var(--border-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: background .14s ease;
+  }
+  .row:first-child { border-top: none; }
+  .row:hover { background: var(--surface-2); }
+  .row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .row .date { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .row .date .tentative { color: var(--text-faint); font-size: 10px; letter-spacing: .08em; display: block; margin-top: 2px; }
+  .row .name { font-weight: 600; font-size: 15px; }
+  .row .name .loc { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); font-weight: 400; margin-top: 3px; letter-spacing: .02em; }
+  .row .name .arrow { color: var(--accent); opacity: 0; transition: opacity .14s ease; }
+  .row:hover .name .arrow { opacity: 1; }
+
+  .chip {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
+    padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .chip.crit { color: var(--sev-crit); border-color: color-mix(in srgb, var(--sev-crit) 45%, transparent); background: color-mix(in srgb, var(--sev-crit) 12%, transparent); }
+  .chip.high { color: var(--sev-high); border-color: color-mix(in srgb, var(--sev-high) 45%, transparent); background: color-mix(in srgb, var(--sev-high) 12%, transparent); }
+  .chip.mid  { color: var(--sev-mid);  border-color: color-mix(in srgb, var(--sev-mid) 45%, transparent);  background: color-mix(in srgb, var(--sev-mid) 12%, transparent); }
+
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr auto; }
+    .row .date { grid-column: 1 / -1; }
+  }
+
+  /* Note + footer */
+  .note {
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 40px;
+  }
+  .note b { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .note ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+
+  footer { border-top: 1px solid var(--border-soft); padding-top: 22px; color: var(--text-faint); font-size: 12px; font-family: var(--mono); }
+  footer .src { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px; }
+  footer .src a { color: var(--text-dim); text-decoration: none; }
+  footer .src a:hover { color: var(--accent); }
+  footer .sig { color: var(--text-faint); letter-spacing: .04em; }
+</style>
+
+<div class="wrap">
+  <div class="inner">
+    <p class="eyebrow">Threat Intel Briefing · Blue Team</p>
+    <h1>セキュリティ カンファレンス トラッカー</h1>
+    <p class="lead">
+      2026年7月以降に開催される、セキュリティ関連カンファレンスの監視リスト。
+      SOC / インシデント対応 / フォレンジック志向で <b>Blue Team関連度</b> を格付けした、アナリスト向けブリーフィングなのだ。
+    </p>
+
+    <div class="metastrip">
+      <div class="stat"><span class="num">12</span><span class="lbl">Tracked</span></div>
+      <div class="divider"></div>
+      <div class="stat"><span class="num">07</span><span class="lbl">国内 JP</span></div>
+      <div class="divider"></div>
+      <div class="stat"><span class="num">05</span><span class="lbl">海外 Intl</span></div>
+      <div class="legend">
+        <span class="li"><span class="dot crit"></span>最高 / 高 直系</span>
+        <span class="li"><span class="dot high"></span>高 実戦訓練</span>
+        <span class="li"><span class="dot mid"></span>中 参考</span>
+      </div>
+    </div>
+
+    <!-- Priority -->
+    <p class="sec-title">Priority Watchlist · Top 4</p>
+    <div class="cards">
+      <div class="card" style="--rail: var(--sev-crit)">
+        <span class="rank">01 · 最優先</span>
+        <h3><a href="https://jsac.jpcert.or.jp/" target="_blank" rel="noopener">JSAC2027</a></h3>
+        <p class="when">2027.01.19–22 · 東京</p>
+        <p class="why">JPCERT/CC主催の「セキュリティ<b>アナリスト</b>会議」。マルウェア解析・脅威分析・IRの実践発表が核。君の職種ど真ん中なのだ。</p>
+      </div>
+      <div class="card" style="--rail: var(--sev-high)">
+        <span class="rank">02 · 高</span>
+        <h3><a href="https://codeblue.jp/" target="_blank" rel="noopener">CODE BLUE 2026</a></h3>
+        <p class="when">2026.11.17–18 · 東京</p>
+        <p class="why">国内最大級の国際会議。IR / フォレンジック / 脅威分析を日英同時通訳で。国内トップ層とのネットワーキング価値も高いのだ。</p>
+      </div>
+      <div class="card" style="--rail: var(--sev-high)">
+        <span class="rank">03 · 高</span>
+        <h3><a href="https://www.sans.org/ja_jp" target="_blank" rel="noopener">SANS Japan（秋）</a></h3>
+        <p class="when">2026 秋 · 東京 + Online</p>
+        <p class="why">FOR508（IR / 脅威ハンティング / フォレンジック）等、Blue Team直系の実戦訓練。GIAC受験にも繋がり、資格志向とも合致なのだ。</p>
+      </div>
+      <div class="card" style="--rail: var(--sev-mid)">
+        <span class="rank">04 · 中〜高</span>
+        <h3><a href="https://blackhat.com/us-26/" target="_blank" rel="noopener">Black Hat USA 2026</a></h3>
+        <p class="when">2026.08 · Las Vegas</p>
+        <p class="why">攻撃側の最新実装を知る = 検出ロジックの精度UP。AI×攻防が今年のホットトピックなのだ。</p>
+      </div>
+    </div>
+
+    <!-- 国内 -->
+    <div class="group">
+      <p class="sec-title">国内 · Japan</p>
+      <div class="rows">
+        <a class="row" href="https://www.gartner.com/jp/conferences/apac/security-risk-management-japan" target="_blank" rel="noopener">
+          <span class="date">2026.07.22–24</span>
+          <span class="name">Gartner Security &amp; Risk Summit Japan <span class="loc">東京 · CISO向け戦略 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://www.sans.org/ja_jp" target="_blank" rel="noopener">
+          <span class="date">2026.09 / 秋<span class="tentative">※ 日程未確定</span></span>
+          <span class="name">SANS Japan <span class="loc">東京 + Online · 防御スキル特化 <span class="arrow">→</span></span></span>
+          <span class="chip high">高</span>
+        </a>
+        <a class="row" href="https://www.iwsec.org/css/2026/index.html" target="_blank" rel="noopener">
+          <span class="date">2026.10.19–23</span>
+          <span class="name">CSS2026 コンピュータセキュリティシンポジウム <span class="loc">浜松 + Online · 学術・研究 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://pacsec.jp/" target="_blank" rel="noopener">
+          <span class="date">例年 10月下旬<span class="tentative">※ 2026日程未発表</span></span>
+          <span class="name">PacSec 2026 <span class="loc">東京 · 国際研究会議 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://codeblue.jp/" target="_blank" rel="noopener">
+          <span class="date">2026.11.17–18</span>
+          <span class="name">CODE BLUE 2026 <span class="loc">東京 · 国内最大級の国際会議 <span class="arrow">→</span></span></span>
+          <span class="chip high">高</span>
+        </a>
+        <a class="row" href="https://www.avtokyo.org/" target="_blank" rel="noopener">
+          <span class="date">例年 11月<span class="tentative">※ 日程未発表</span></span>
+          <span class="name">AVTOKYO 2026 <span class="loc">東京 · カジュアル交流系 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://jsac.jpcert.or.jp/" target="_blank" rel="noopener">
+          <span class="date">2027.01.19–22</span>
+          <span class="name">JSAC2027 <span class="loc">東京 · JPCERT/CC · アナリスト直系 <span class="arrow">→</span></span></span>
+          <span class="chip crit">最高</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 海外 -->
+    <div class="group">
+      <p class="sec-title">海外 · International</p>
+      <div class="rows">
+        <a class="row" href="https://blackhat.com/us-26/" target="_blank" rel="noopener">
+          <span class="date">2026.08<span class="tentative">※ 日付要確認</span></span>
+          <span class="name">Black Hat USA 2026 <span class="loc">Las Vegas · 脅威研究・脆弱性開示 <span class="arrow">→</span></span></span>
+          <span class="chip high">中〜高</span>
+        </a>
+        <a class="row" href="https://defcon.org/" target="_blank" rel="noopener">
+          <span class="date">2026.08<span class="tentative">※ 日付要確認</span></span>
+          <span class="name">DEF CON 34 <span class="loc">Las Vegas · 攻防両面 / CTF <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://www.infosecworldusa.com/" target="_blank" rel="noopener">
+          <span class="date">2026.10.11–15</span>
+          <span class="name">InfoSec World 2026 <span class="loc">Orlando · 総合セキュリティ会議 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://owasp.org/events/" target="_blank" rel="noopener">
+          <span class="date">2026.11.05–06</span>
+          <span class="name">OWASP Global AppSec USA 2026 <span class="loc">San Francisco · アプリセキュリティ <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+        <a class="row" href="https://defcon.org/" target="_blank" rel="noopener">
+          <span class="date">2026.11</span>
+          <span class="name">DEF CON Middle East 2026 <span class="loc">Bahrain · 参加ハードル高 <span class="arrow">→</span></span></span>
+          <span class="chip mid">中</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Analyst Note · 信頼度</b>
+      <ul>
+        <li>海外勢（Black Hat / DEF CON）の8月日程は公式で矛盾が見られたため<b style="all:unset;color:var(--text)">「要確認」</b>扱い。渡航前に公式再確認推奨。</li>
+        <li>PacSec / AVTOKYO / SANS秋 は2026年の確定日程が未発表。例年パターンを記載しているのだ。</li>
+        <li>SECCON / Hardening は今回未収録。次回の調査対象なのだ。</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="src">
+        <a href="https://jsac.jpcert.or.jp/" target="_blank" rel="noopener">JSAC</a>
+        <a href="https://codeblue.jp/" target="_blank" rel="noopener">CODE BLUE</a>
+        <a href="https://www.sans.org/ja_jp" target="_blank" rel="noopener">SANS</a>
+        <a href="https://blackhat.com/us-26/" target="_blank" rel="noopener">Black Hat</a>
+        <a href="https://defcon.org/" target="_blank" rel="noopener">DEF CON</a>
+        <a href="https://www.iwsec.org/css/2026/index.html" target="_blank" rel="noopener">CSS2026</a>
+        <a href="https://pacsec.jp/" target="_blank" rel="noopener">PacSec</a>
+        <a href="https://www.avtokyo.org/" target="_blank" rel="noopener">AVTOKYO</a>
+        <a href="https://owasp.org/events/" target="_blank" rel="noopener">OWASP</a>
+        <a href="https://www.infosecworldusa.com/" target="_blank" rel="noopener">InfoSec World</a>
+      </div>
+      <div class="sig">// compiled by クロ (Opus) · reviewed from Haiku recon · 2026-07-18</div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
